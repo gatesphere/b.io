@@ -73,6 +73,28 @@ bio_const_info := Object clone do(
     list("GGA", "G"),
     list("GGG", "G")
   ) asMap
+  monoisotopic_mass := list(
+    list("A", 71.03711),
+    list("C", 103.00919),
+    list("D", 115.02694),
+    list("E", 129.04259),
+    list("F", 147.06841),
+    list("G", 57.02146),
+    list("H", 137.05891),
+    list("I", 113.08406),
+    list("K", 128.09496),
+    list("L", 113.08406),
+    list("M", 131.04049),
+    list("N", 114.04293),
+    list("P", 97.05276),
+    list("Q", 128.05858),
+    list("R", 156.10111),
+    list("S", 87.03203),
+    list("T", 101.04768),
+    list("V", 99.06841),
+    list("W", 186.07931),
+    list("Y", 163.06333)
+  ) asMap
 )
 
 // additions to Sequence (for ease of use)
@@ -151,5 +173,14 @@ Sequence locations := method(str,
     positions append(index)
   )
   positions
+)
+
+Sequence mass := method(
+  m := 0
+  self foreach(c,
+    c = c asCharacter
+    m = m + bio_const_info monoisotopic_mass at(c)
+  )
+  m
 )
 
